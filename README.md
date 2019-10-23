@@ -168,7 +168,7 @@ dist
 git init
 git add .
 git commit -m 'First!'
-git remote add origin git@github.com:mikegowej/react-starter.git
+git remote add origin git@github.com:mikegowen/react-starter.git
 git push -u origin master
 ```
 

@@ -1,7 +1,7 @@
 {
   "name": "react-starter",
   "version": "1.0.0",
-  "description": "A minimal React starter app.",
+  "description": "A basic React starter app.",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open --hot --mode development",

@@ -135,7 +135,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: [
+          "style-loader",
+          "css-loader"
+        ]
       }
     ]
   },
@@ -144,7 +147,11 @@ module.exports = {
       template: "./src/index.html",
       filename: "./index.html"
     })
-  ]
+  ],
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[contenthash].js'
+  }
 };
 ```
 
@@ -155,6 +162,8 @@ The second rule tells Webpack to use `html-loader` for all `.html` files.
 The third rule tells Webpack to use `css-loader` and `style-loader` for all CSS files.
 
 The `plugins` section tells Webpack to use `html-webpack-plugin` to use `./src/index.html` as a template, and output the final bundled HTML to `./index.html`.
+
+The `output` section tell Webpack where to output our bundled files and to name them using a hash for caching purposes.
 
 ## Replace scripts in package.json with Webpack scripts
 
@@ -195,8 +204,8 @@ Add this under the `loader: "babel-loader"` line
 …
 options: {
   presets: [
-    '@babel/preset-env',
-    '@babel/preset-react',
+    "@babel/preset-env",
+    "@babel/preset-react",
   ]
 },
 …

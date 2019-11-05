@@ -1,6 +1,6 @@
 # React Starter
 
-This is a basic React starter app that can be used to bootstrap new React projects. The exact steps used to create this project can be found below. I would recommend going through the steps instead of cloning this repo if only for learning purposes. These steps were compiled after reading countless tutorials on creating a React app from scratch and choosing the set of features, configuration, and conventions that work well for *my* projects. Your mileage may vary.
+This is a barebones React starter app that can be used to bootstrap new React projects. The exact steps used to create this project can be found below. I would recommend going through the steps instead of cloning this repo if only for learning purposes. These steps were compiled after reading countless tutorials on creating a React app from scratch and choosing the set of features, configuration, and conventions that work well for *my* projects. Your mileage may vary.
 
 ## Create your project directory structure
 

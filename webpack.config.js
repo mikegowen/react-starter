@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 module.exports = {
   module: {
@@ -10,8 +11,8 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: [
-              '@babel/preset-env',
-              '@babel/preset-react',
+              "@babel/preset-env",
+              "@babel/preset-react",
             ]
           }
         }
@@ -22,6 +23,13 @@ module.exports = {
           {
             loader: "html-loader"
           }
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          "css-loader"
         ]
       }
     ]
@@ -34,6 +42,6 @@ module.exports = {
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js'
+    filename: '[name].[hash].js'
   }
 };

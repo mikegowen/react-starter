@@ -240,8 +240,8 @@ Again, we only need to save these as developer dependencies.
 ## Add your exclusions
 
 ```
-node_modules
-dist
+node_modules/
+dist/
 ```
 
 We don't want to check in the various packages we install in `/node_modules`, they have their own GitHub respositories :) We also don't need to check in our final bundled files in `/dist` as they will be generated in production.

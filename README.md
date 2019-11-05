@@ -92,9 +92,7 @@ This will create your `package.json`. You will be presented with a few questions
 
 ## Install webpack
 
-`npm install webpack webpack-cli webpack-dev-server babel-loader html-loader html-webpack-plugin css-loader style-loader --save-dev --build-from-source`
-
-**Update 11/4/19:** The `--build-from-source` flag was added to address a temporary warning with `node-pre-gyp`.
+`npm install webpack webpack-cli webpack-dev-server babel-loader html-loader html-webpack-plugin css-loader style-loader --save-dev`
 
 Webpack crawls your code recursively through `require` and `import` statements and builds a dependency graph. It then usues that graph to build a single JavaScript file with all of the modules in the correct order. Webpack starts at the entry point defined in `package.json`, (`main.js` by default).
 

@@ -120,6 +120,7 @@ This is where we'll tell webpack to use the various loaders that we installed.
 ### webpack.config.js
 ```
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 module.exports = {
   module: {

@@ -156,7 +156,7 @@ module.exports = {
     })
   ],
   devServer: {
-    publicPath: "/dist"
+    publicPath: "/"
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

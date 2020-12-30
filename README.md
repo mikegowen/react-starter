@@ -191,7 +191,6 @@ The `output` section tell webpack where to output our bundled files and to name 
 
  These are the command line scripts we can run to develop and build our app. We can run them by typing `npm start` and `npm run build` respectively. The `start` script tells `webpack` that we're going to be developing and to watch for changes. The `build` script outputs our final bundled files to `/dist`.
 
-**--open** – Automatically opens the default browser and loads the localhost environment.<br />
 **--hot** – Reload the browser automatically whenever a change is made to our app.<br />
 **--mode** – Development or production.
 
@@ -211,6 +210,8 @@ Babel is used to transpile modern JavaScript into JavaScript that is supported b
 **@babel/runtime** – This allows you to use async/await in React, among other things.<br />
 
 ## Create your Babel configuration file
+
+`touch .babelrc`
 
 ### .babelrc
 ```
@@ -271,6 +272,16 @@ Start developing!
 
 # Adding an Express server
 
+## Install Express
+
+`npm install express`
+
+## Install Nodemon
+
+`npm install -g nodemon`
+
+Nodemon monitors your server files and automatically restart it when changes are made. It's best to install this globally since you can use it for all of your Node apps.
+
 ## Create a server folder
 
 `mkdir server`
@@ -294,7 +305,7 @@ app.get('/', (req, res) => {
 });
  ```
 
- This tells Express to listen for requests on port 3000, and sets up a single GET route at "/".
+ This tells Express to listen for requests on port 3000, and sets up a single GET route at `/`.
 
  ## Call the Express server from React
 
@@ -333,6 +344,8 @@ export default App;
  ## Start the server
 
  `nodemon server/index.js`
+
+ We start the server using Nodemon so it can monitor changes to the server file.
 
 ## License
 

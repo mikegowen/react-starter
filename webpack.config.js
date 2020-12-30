@@ -40,6 +40,9 @@ module.exports = {
       filename: "./index.html"
     })
   ],
+  devServer: {
+    publicPath: "/"
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js'

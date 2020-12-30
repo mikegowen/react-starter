@@ -155,9 +155,12 @@ module.exports = {
       filename: "./index.html"
     })
   ],
+  devServer: {
+    publicPath: "/dist"
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[hash].js'
+    filename: '[name].[fullhash].js'
   }
 };
 ```
@@ -169,6 +172,8 @@ The second rule tells webpack to use `html-loader` for all `.html` files.
 The third rule tells webpack to use `css-loader` and `style-loader` for all CSS files. These are processed right to left (or bottom to top).
 
 The `plugins` section tells webpack to use `html-webpack-plugin` with `./src/index.html` as a template, and output the final bundled HTML to `./index.html`.
+
+The `devServer` section sets the bundle path.
 
 The `output` section tell webpack where to output our bundled files and to name them using a hash for cache busting purposes.
 

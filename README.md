@@ -96,13 +96,13 @@ This will create your `package.json`. You will be presented with a few questions
 
 Webpack crawls your code recursively through `require` and `import` statements and builds a dependency graph. It then usues that graph to build a single JavaScript file with all of the modules in the correct order. Webpack starts at the entry point defined in `package.json`, (`index.js` by default).
 
-Webpack can only read JavaScript, so if you want to Webpack to read other file types, you need to use "loaders". Loaders convert non-JavaScript files into JavaScript modules that Webpack can work with.
+Webpack only works with JavaScript, so if you want Webpack to read other file types, you need to use "loaders". Loaders convert non-JavaScript files into JavaScript modules that Webpack can work with.
 
 **webpack** – This is the core webpack package.<br />
 **webpack-cli** – Allows us to bundle from the command line.<br />
 **webpack-dev-server** – Automatically bundles our code whenever we make changes to our app so we don't have to do it manually.<br />
 **babel-loader** – The loader for Babel. Babel is used to transpile modern JavaScript to older JavaScript that can be read by older browsers (explained more later).<br />
-**html-loader** – This loader will convert your HTML into a string, resolving image sources into `require` statements, and exports it as a JavaScript module. Once HTML and images are managed by webpack you don't have to worry about manually updating referenced filenames or paths that might change due to configuration changes or cache busting filename hashing,<br />
+**html-loader** – This loader will convert your HTML into a string, resolving image sources into `require` statements, and exports it as a JavaScript module. Once HTML and images are managed by webpack you don't have to worry about manually updating referenced filenames or paths that might change due to configuration changes or cache busting filename hashing.<br />
 **html-webpack-plugin** – Generates HTML dynamically using a template we supply and embeds a `<script>` tag whose `src` attribute points to our bundled JavaScript. Again, without this plugin, we'd need to manually update the `src` attribute if we were to use filename hashing.<br />
 **css-loader** – This loader turns all of your CSS into a string and exports it as a module resolving things like `url()` into `require` for reasons similar to `html-loader`.<br />
 **style-loader** – This loader takes the final processed CSS and inserts it between `<style>` tags in your HTML.
@@ -222,12 +222,12 @@ These two presets are what `babel-loader` uses to transpile JavaScript and JSX r
 
 ## Install React
 
-`npm install react react-dom --save-dev`
+`npm install react react-dom`
 
 **react** – This is the core React package.<br />
 **react-dom** – This package lets React connect to the DOM.
 
-Again, we only need to save these as developer dependencies.
+We'll install these are regular dependencies.
 
 ## Create your README
 
@@ -264,7 +264,7 @@ Start developing!
 
 ## License
 
-© 2019 Mike Gowen
+© 2021 Mike Gowen
 
 MIT License
 

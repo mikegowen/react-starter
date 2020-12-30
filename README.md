@@ -282,6 +282,12 @@ Start developing!
 
 Nodemon monitors your server files and automatically restart it when changes are made. It's best to install this globally since you can use it for all of your Node apps.
 
+## Install CORS
+
+`npm install cors`
+
+This permits your client to talk to your server even though they are not in the same domain.
+
 ## Create a server folder
 
 `mkdir server`
@@ -295,8 +301,11 @@ This is the file that will contain your Express server and routes.
 ### index.js
 ```
 const express = require("express")
+const cors = require("cors")
 const app = express()
 const port = process.env.PORT || 3000
+
+app.use(cors())
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
 

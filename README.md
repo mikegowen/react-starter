@@ -197,33 +197,34 @@ The `output` section tell webpack where to output our bundled files and to name 
 
 ## Install Babel
 
-`npm install @babel/core @babel/preset-env @babel/preset-react --save-dev`
+`npm install @babel/core @babel/preset-env @babel/preset-react @babel/plugin-transform-runtime --save-dev`
 
 Babel is used to transpile modern JavaScript into JavaScript that is supported by older browsers. This allows us to use the newest JavaScript features (some of which React requires) without worrying about whether a our target browsers support them.
 
 **@babel/core** – This is the core Babel package.<br />
 **@babel/preset-env** This the main transpiler for converting modern JavaScript into older browser compatible JavaScript.<br />
 **@babel/preset-react** – This preset allows us to convert JSX (used by React) into regular JavaScript.<br />
+**@babel/plugin-transform-runtime** – This allows you to use async/await in React, among other things.<br />
 
-Again, we only need to save these as developer dependencies.
+`npm install @babel/runtime`
 
-## Add your Babel configuration options to your webpack configuration file
+**@babel/runtime** – This allows you to use async/await in React, among other things.<br />
 
-Add this under the `loader: "babel-loader"` line.
+## Create your Babel configuration file
 
-### webpack.config.js
+### .babelrc
 ```
-…
-options: {
-  presets: [
-    "@babel/preset-env",
-    "@babel/preset-react",
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "plugins": [
+    ["@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
   ]
 }
-…
 ```
-
-These two presets are what `babel-loader` uses to transpile JavaScript and JSX respectively. Babel presets are a collection of instructions on how to transpile various JavaScript features for older browsers.
 
 ## Install React
 

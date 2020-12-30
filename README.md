@@ -269,6 +269,71 @@ git push -u origin master
 
 Start developing!
 
+# Adding an Express server
+
+## Create a server folder
+
+`mkdir server`
+
+## Create a server file
+
+`touch server/index.js`
+
+This is the file that will contain your Express server and routes.
+
+### index.js
+```
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+app.get('/', (req, res) => {
+  res.send({ message: 'Success!' });
+});
+ ```
+
+ This tells Express to listen for requests on port 3000, and sets up a single GET route at "/".
+
+ ## Call the Express server from React
+
+Update your `App.jsx` to call the Express server when the component loads.
+
+### App.jsx
+```
+import React, { useState, useEffect } from "react";
+import "../styles/App.css"
+
+function App() {
+  const [data, setData] = useState('');
+
+  useEffect(() => {
+    callApi()
+      .then(response => {
+        setData(response.message);
+      })
+  });
+
+  const callApi = async () => {
+    let response = await fetch('http://localhost:3000/');
+    response = await response.json()
+    return response
+  }
+
+  return (
+    <div className="App">
+      {data}
+    </div>
+  );
+};
+
+export default App;
+```
+ ## Start the server
+
+ `nodemon server/index.js`
+
 ## License
 
 © 2021 Mike Gowen

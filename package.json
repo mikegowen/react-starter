@@ -4,7 +4,7 @@
   "description": "A barebones React starter app.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --hot --mode development",
+    "start:app": "webpack serve --hot --mode development",
     "build": "webpack --mode production",
     "start:server": "nodemon server/index.js"
   },

@@ -1,5 +1,5 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const path = require("path");
+const HtmlWebPackPlugin = require("html-webpack-plugin")
+const path = require("path")
 
 module.exports = {
   module: {
@@ -38,7 +38,7 @@ module.exports = {
     publicPath: "/"
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[fullhash].js'
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[fullhash].js"
   }
-};
+}

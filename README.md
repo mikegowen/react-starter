@@ -40,11 +40,11 @@ The key part of this markup is `id="root"`. In `index.js` we will tell React to 
 
 ### index.js
 ```
-import React from "react";
-import ReactDOM from "react-dom";
+import React from "react"
+import ReactDOM from "react-dom"
 import App from "./components/App.jsx"
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+ReactDOM.render(<App />, document.querySelector("#root"))
 ```
 
 The last line simply says to take the `App` component and render it within the HTML tag with the `id` of `root`.
@@ -56,7 +56,7 @@ The last line simply says to take the `App` component and render it within the H
 
 ### App.jsx
 ```
-import React from "react";
+import React from "react"
 import "../styles/App.css"
 
 function App() {
@@ -64,10 +64,10 @@ function App() {
     <div className="App">
       Hello world!
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
 ```
 This is a very simple React component. We first need to import the React library. Then we import the CSS file we just created to accompany this component. Classes are passed to components using the `className` property. Finally, we create and export our component which consists of a simple function that returns JSX. JSX essentially allows us to write something similar to HTML directly in JavaScript instead of manually creating elements.
 
@@ -119,8 +119,8 @@ This is where we'll tell webpack to use the various loaders that we installed.
 
 ### webpack.config.js
 ```
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const path = require("path");
+const HtmlWebPackPlugin = require("html-webpack-plugin")
+const path = require("path")
 
 module.exports = {
   module: {
@@ -159,10 +159,10 @@ module.exports = {
     publicPath: "/"
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[fullhash].js'
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[fullhash].js"
   }
-};
+}
 ```
 
 The first `rule` above tells webpack to use `babel-loader` to process all `.js.` and `.jsx` files, ignoring anything in the `node_modules`  folder.
@@ -258,7 +258,7 @@ We don't want to check in the various packages we install in `/node_modules`, th
 ```
 git init
 git add .
-git commit -m 'First!'
+git commit -m "First!"
 git branch -M main
 git remote add origin git@github.com:mikegowen/react-starter.git
 git push -u origin master
@@ -294,15 +294,15 @@ This is the file that will contain your Express server and routes.
 
 ### index.js
 ```
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
+const express = require("express")
+const app = express()
+const port = process.env.PORT || 3000
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log(`Listening on port ${port}`))
 
-app.get('/', (req, res) => {
-  res.send({ message: 'Success!' });
-});
+app.get("/", (req, res) => {
+  res.send({ message: "Success!" })
+})
  ```
 
  This tells Express to listen for requests on port 3000, and sets up a single GET route at `/`.
@@ -313,21 +313,21 @@ Update your `App.jsx` to call the Express server when the component loads.
 
 ### App.jsx
 ```
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 import "../styles/App.css"
 
 function App() {
-  const [data, setData] = useState('');
+  const [data, setData] = useState("")
 
   useEffect(() => {
     callApi()
       .then(response => {
-        setData(response.message);
+        setData(response.message)
       })
-  });
+  })
 
   const callApi = async () => {
-    let response = await fetch('http://localhost:3000/');
+    let response = await fetch("http://localhost:3000/")
     response = await response.json()
     return response
   }
@@ -336,10 +336,10 @@ function App() {
     <div className="App">
       {data}
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
 ```
  ## Start the server
 

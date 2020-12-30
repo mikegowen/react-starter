@@ -347,6 +347,8 @@ export default App;
 
  We start the server using Nodemon so it can monitor changes to the server file.
 
+ Now you should be able to access your React app and it will call the Express server and return a result.
+
 ## License
 
 © 2021 Mike Gowen

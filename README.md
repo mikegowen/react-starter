@@ -341,11 +341,25 @@ function App() {
 
 export default App
 ```
+
+## Update scripts in package.json to add server
+
+### package.json
+```
+…
+"scripts": {
+  "start:app": "webpack serve --hot --mode development",
+  "build": "webpack --mode production"
+  "start:server": "nodemon server/index.js"
+},
+…
+ ```
+
+We also changed the script name for starting the app.
+
  ## Start the server
 
- `nodemon server/index.js`
-
- We start the server using Nodemon so it can monitor changes to the server file.
+ `npm run start:server`
 
  Now you should be able to access your React app and it will call the Express server and return a result.
 

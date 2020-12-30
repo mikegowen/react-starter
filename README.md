@@ -178,13 +178,13 @@ The `output` section tell webpack where to output our bundled files and to name 
 ```
 …
 "scripts": {
-  "start": "webpack-dev-server --open --hot --mode development",
+  "start": "webpack serve --hot --mode development",
   "build": "webpack --mode production"
 },
 …
  ```
 
- These are the command line scripts we can run to develop and build our app. We can run them by typing `npm start` and `npm run build` respectively. The `start` script tells `webpack-dev-server` that we're going to be developing and to watch for changes. The `build` script outputs our final bundled files to `/dist`.
+ These are the command line scripts we can run to develop and build our app. We can run them by typing `npm start` and `npm run build` respectively. The `start` script tells `webpack` that we're going to be developing and to watch for changes. The `build` script outputs our final bundled files to `/dist`.
 
 **--open** – Automatically opens the default browser and loads the localhost environment.<br />
 **--hot** – Reload the browser automatically whenever a change is made to our app.<br />

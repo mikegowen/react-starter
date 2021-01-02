@@ -4,8 +4,9 @@
   "description": "Track time in Figma.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --hot --mode development",
-    "build": "webpack --mode production"
+    "start:app": "webpack serve --hot --mode development",
+    "build": "webpack --mode production",
+    "start:server": "nodemon src/server/index.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "webpack-dev-server": "^3.11.1"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   }

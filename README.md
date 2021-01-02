@@ -260,7 +260,7 @@ We don’t want to check in the various packages we install in `/node_modules`, 
 ```
 git init
 git add .
-git commit -m "First!"
+git commit -m 'First!'
 git branch -M main
 git remote add origin git@github.com:mikegowen/react-starter.git
 git push -u origin master

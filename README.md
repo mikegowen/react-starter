@@ -360,7 +360,7 @@ export default App
 …
 "scripts": {
   "start:app": "webpack serve --hot --mode development",
-  "build": "webpack --mode production"
+  "build": "webpack --mode production",
   "start:server": "nodemon src/server/index.js"
 },
 …

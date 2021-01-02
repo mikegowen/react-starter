@@ -1,21 +1,22 @@
 # React Starter
 
-This is a barebones React starter app that can be used to bootstrap new React projects. The exact steps used to create this project can be found below. I would recommend going through the steps instead of cloning this repo if only for learning purposes. These steps were compiled after reading countless tutorials on creating a React app from scratch and choosing the set of features, configuration, and conventions that work well for *my* projects. Your mileage may vary.
+This is a bare bones React starter app, with optional Express server, that can be used to bootstrap new React projects. The exact steps used to create this project can be found below. I would recommend going through the steps instead of cloning this repo if only for learning purposes. These steps were compiled after reading countless tutorials on creating a React app from scratch and choosing the set of features, configuration, and conventions that work well for *my* projects. Your mileage may vary.
 
 ## Create your project directory structure
 
 `mkdir react-starter`<br />
 `cd react-starter`<br />
 `mkdir src`<br />
-`mkdir src/components`<br />
-`mkdir src/styles`
+`mkdir src/client`<br />
+`mkdir src/client/components`<br />
+`mkdir src/client/styles`
 
-The `/src` directory is where all of our source code will live. Bundled code will be outputted to `/dist` but that folder is created automatically when we build our app so we won't create it here.
+The `/src` directory is where all of our source code will live. We’ll add an additional folder under that called `/client` in case we want to add a `/server` folder alongside it later. Final bundled code will be outputted to `/public` but that folder is created automatically when we build our app so we won’t create it here.
 
-## Create your first pages
+## Create your main files
 
-`touch src/index.html`<br />
-`touch src/index.js`
+`touch src/client/index.html`<br />
+`touch src/client/index.js`
 
 ### index.html
 
@@ -47,12 +48,12 @@ import App from "./components/App.jsx"
 ReactDOM.render(<App />, document.querySelector("#root"))
 ```
 
-The last line simply says to take the `App` component and render it within the HTML tag with the `id` of `root`.
+The last line simply says to take the `App` component and render it within the tag with the `id` of `root` in the prevous HTML file we created.
 
 ## Create your first React component
 
-`touch src/components/App.jsx`<br />
-`touch src/styles/App.css`
+`touch src/client/components/App.jsx`<br />
+`touch src/client/styles/App.css`
 
 ### App.jsx
 ```
@@ -82,7 +83,7 @@ This is a very simple CSS file to accompany `App.jsx`.
 
 ## Create GitHub repository
 
-You'll want your GitHub repo URL when you initialize npm in the next section, or you can always add it later.
+You’ll want your GitHub repo URL handy when you initialize npm in the next section, or you can always add it later.
 
 ## Initialize npm
 
@@ -100,10 +101,10 @@ Webpack only works with JavaScript, so if you want Webpack to read other file ty
 
 **webpack** – This is the core webpack package.<br />
 **webpack-cli** – Allows us to bundle from the command line.<br />
-**webpack-dev-server** – Automatically bundles our code whenever we make changes to our app so we don't have to do it manually.<br />
+**webpack-dev-server** – Automatically bundles our code whenever we make changes to our app so we don’t have to do it manually.<br />
 **babel-loader** – The loader for Babel. Babel is used to transpile modern JavaScript to older JavaScript that can be read by older browsers (explained more later).<br />
-**html-loader** – This loader will convert your HTML into a string, resolving image sources into `require` statements, and exports it as a JavaScript module. Once HTML and images are managed by webpack you don't have to worry about manually updating referenced filenames or paths that might change due to configuration changes or cache busting filename hashing.<br />
-**html-webpack-plugin** – Generates HTML dynamically using a template we supply and embeds a `<script>` tag whose `src` attribute points to our bundled JavaScript. Again, without this plugin, we'd need to manually update the `src` attribute if we were to use filename hashing.<br />
+**html-loader** – This loader will convert your HTML into a string, resolving image sources into `require` statements, and exports it as a JavaScript module. Once HTML and images are managed by webpack you don’t have to worry about manually updating referenced filenames or paths that might change due to configuration changes or cache busting filename hashing.<br />
+**html-webpack-plugin** – Generates HTML dynamically using a template we supply and embeds a `<script>` tag whose `src` attribute points to our bundled JavaScript. Again, without this plugin, we’d need to manually update the `src` attribute if we were to use filename hashing.<br />
 **css-loader** – This loader turns all of your CSS into a string and exports it as a module resolving things like `url()` into `require` for reasons similar to `html-loader`.<br />
 **style-loader** – This loader takes the final processed CSS and inserts it between `<style>` tags in your HTML.
 
@@ -113,7 +114,7 @@ We only need to save these as developer dependencies (`--save-dev`), since our p
 
 `touch webpack.config.js`
 
-This is where we'll tell webpack to use the various loaders that we installed.
+This is where we’ll tell webpack to use the various loaders that we installed.
 
 ## Add your webpack configuration options
 
@@ -158,22 +159,23 @@ module.exports = {
   devServer: {
     publicPath: "/"
   },
+  entry: "./src/client/index.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "public"),
     filename: "[name].[fullhash].js"
   }
 }
 ```
 
-The first `rule` above tells webpack to use `babel-loader` to process all `.js.` and `.jsx` files, ignoring anything in the `node_modules`  folder.
+The first `rule` above tells webpack to use `babel-loader` to process all `.js.` and `.jsx` files, ignoring anything in the `node_modules` folder.
 
 The second rule tells webpack to use `html-loader` for all `.html` files.
 
 The third rule tells webpack to use `css-loader` and `style-loader` for all CSS files. These are processed right to left (or bottom to top).
 
-The `plugins` section tells webpack to use `html-webpack-plugin` with `./src/index.html` as a template, and output the final bundled HTML to `./index.html`.
+The `plugins` section tells webpack to use `html-webpack-plugin` with `./src/client/index.html` as a template, and output the final bundled HTML to `./index.html`.
 
-The `devServer` section sets the bundle path.
+Setting `publicPath` inside`devServer` sets the path that you’ll use to access the root of the site e.g. `http://localhost:8080/my-path`.
 
 The `output` section tell webpack where to output our bundled files and to name them using a hash for cache busting purposes.
 
@@ -189,7 +191,7 @@ The `output` section tell webpack where to output our bundled files and to name 
 …
  ```
 
- These are the command line scripts we can run to develop and build our app. We can run them by typing `npm start` and `npm run build` respectively. The `start` script tells `webpack` that we're going to be developing and to watch for changes. The `build` script outputs our final bundled files to `/dist`.
+ These are the command line scripts we can run to develop and build our app. We can run them by typing `npm start` and `npm run build` respectively. The `start` script tells `webpack` that we’re going to be developing and to watch for changes. The `build` script outputs our final bundled files to `/public`.
 
 **--hot** – Reload the browser automatically whenever a change is made to our app.<br />
 **--mode** – Development or production.
@@ -234,7 +236,7 @@ Babel is used to transpile modern JavaScript into JavaScript that is supported b
 **react** – This is the core React package.<br />
 **react-dom** – This package lets React connect to the DOM.
 
-We'll install these are regular dependencies.
+We’ll install these are regular dependencies.
 
 ## Create your README
 
@@ -248,10 +250,10 @@ We'll install these are regular dependencies.
 
 ```
 node_modules/
-dist/
+public/
 ```
 
-We don't want to check in the various packages we install in `/node_modules`, they have their own GitHub respositories :) We also don't need to check in our final bundled files in `/dist` as they will be generated in production.
+We don’t want to check in the various packages we install in `/node_modules`, they have their own GitHub respositories :) We also don’t need to check in our final bundled files in `/public` as they will be generated in production.
 
 ## Setup Git/Github in your project
 
@@ -280,21 +282,21 @@ Start developing!
 
 `npm install -g nodemon`
 
-Nodemon monitors your server files and automatically restart it when changes are made. It's best to install this globally since you can use it for all of your Node apps.
+Nodemon monitors your server files and automatically restart it when changes are made. It’s best to install this globally since you can use it for all of your Node apps.
 
 ## Install CORS
 
 `npm install cors`
 
-This permits your client to talk to your server even though they are not in the same domain.
+This permits your client to talk to your server even though they are not on the same domain.
 
 ## Create a server folder
 
-`mkdir server`
+`mkdir src/server`
 
 ## Create a server file
 
-`touch server/index.js`
+`touch src/server/index.js`
 
 This is the file that will contain your Express server and routes.
 
@@ -359,7 +361,7 @@ export default App
 "scripts": {
   "start:app": "webpack serve --hot --mode development",
   "build": "webpack --mode production"
-  "start:server": "nodemon server/index.js"
+  "start:server": "nodemon src/server/index.js"
 },
 …
  ```

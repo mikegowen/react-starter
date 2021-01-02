@@ -30,15 +30,16 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
+      template: "./src/client/index.html",
       filename: "./index.html"
     })
   ],
   devServer: {
     publicPath: "/"
   },
+  entry: "./src/client/index.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "public"),
     filename: "[name].[fullhash].js"
   }
 }

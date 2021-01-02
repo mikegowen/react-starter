@@ -37,7 +37,7 @@ module.exports = {
   devServer: {
     publicPath: "/"
   },
-  entry: "./src/client/index.js",
+  entry: "src/client/index.js",
   output: {
     path: path.resolve(__dirname, "public"),
     filename: "[name].[fullhash].js"

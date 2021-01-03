@@ -324,18 +324,19 @@ Update your `App.jsx` to call the Express server when the component loads.
 
 ### App.jsx
 ```
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import "../styles/App.css"
 
 function App() {
   const [data, setData] = useState("")
 
-  useEffect(() => {
+  const _handleClick = (event) => {
+    event.preventDefault()
     callApi()
       .then(response => {
         setData(response.message)
       })
-  })
+  }
 
   const callApi = async () => {
     let response = await fetch("http://localhost:3000/")
@@ -346,6 +347,9 @@ function App() {
   return (
     <div className="App">
       {data}
+      <button onClick={_handleClick}>
+        Update
+      </button>
     </div>
   )
 }

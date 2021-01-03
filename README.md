@@ -320,7 +320,7 @@ app.get("/", (req, res) => {
 
  ## Call the Express server from React
 
-Update your `App.jsx` to call the Express server when the component loads.
+Update your `App.jsx` to call the Express server when a button is clicked.
 
 ### App.jsx
 ```

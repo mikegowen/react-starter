@@ -124,6 +124,14 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 const path = require("path")
 
 module.exports = {
+  resolve: {
+    extensions: [
+      ".jsx",
+      ".mjs",
+      ".js",
+      ".json",
+    ],
+  },
   module: {
     rules: [
       {
@@ -166,6 +174,7 @@ module.exports = {
   }
 }
 ```
+The `resolve` section allows you to leave off the listed extensions when importing.
 
 The first `rule` above tells webpack to use `babel-loader` to process all `.js.` and `.jsx` files, ignoring anything in the `node_modules` folder.
 

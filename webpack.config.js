@@ -2,6 +2,14 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 const path = require("path")
 
 module.exports = {
+  resolve: {
+    extensions: [
+      ".jsx",
+      ".mjs",
+      ".js",
+      ".json",
+    ],
+  },
   module: {
     rules: [
       {

@@ -257,6 +257,8 @@ We’ll install these are regular dependencies.
 
 ## Add your exclusions
 
+### .gitignore
+
 ```
 node_modules/
 public/

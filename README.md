@@ -301,6 +301,12 @@ Nodemon monitors your server files and automatically restart it when changes are
 
 This permits your client to talk to your server even though they are not on the same domain.
 
+## Install Axios
+
+`npm install axios`
+
+This replaces `fetch` for communicating with our Express server.
+
 ## Create a server folder
 
 `mkdir src/server`
@@ -323,44 +329,33 @@ app.use(cors())
 app.listen(port, () => console.log(`Listening on port ${port}`))
 
 app.get("/", (req, res) => {
-  res.send({ message: "Success!" })
+  res.json({ message: "Hello world!" })
 })
- ```
+```
 
- This tells Express to listen for requests on port 3000, and sets up a single GET route at `/`.
+This tells Express to listen for requests on port 3000, and sets up a single GET route at `/`.
 
- ## Call the Express server from React
+## Call the Express server from React
 
 Update your `App.jsx` to call the Express server when a button is clicked.
 
 ### App.jsx
 ```
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 import "../styles/App.css"
 
 function App() {
-  const [data, setData] = useState("")
+  const [message, setMessage] = useState([])
 
-  const _handleClick = (event) => {
-    event.preventDefault()
-    callApi()
-      .then(response => {
-        setData(response.message)
-      })
-  }
-
-  const callApi = async () => {
-    let response = await fetch("http://localhost:3000/")
-    response = await response.json()
-    return response
-  }
+  useEffect(async () => {
+    const response = await axios.get("http://localhost:3000/")
+    setMessage(response.data.message)
+  }, [])
 
   return (
     <div className="App">
-      {data}
-      <button onClick={_handleClick}>
-        Update
-      </button>
+      {message}
     </div>
   )
 }
@@ -379,19 +374,19 @@ export default App
   "start:server": "nodemon src/server/index.js"
 },
 …
- ```
+```
 
- ## Start the server
+## Start the server
 
- `npm run start:server`
+`npm run start:server`
 
- We also changed the script name for starting the client.
+We also changed the script name for starting the client.
 
-  ## Start the client
+## Start the client
 
- `npm run start:client`
+`npm run start:client`
 
- Now you should be able to access your React app (client) and it will call the Express server and return a result.
+Now you should be able to access your React app (client) and it will call the Express server and return a result.
 
 ## License
 
@@ -399,21 +394,8 @@ export default App
 
 MIT License
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

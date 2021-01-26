@@ -374,20 +374,24 @@ export default App
 ```
 …
 "scripts": {
-  "start:app": "webpack serve --hot --mode development",
+  "start:client": "webpack serve --hot --mode development",
   "build": "webpack --mode production",
   "start:server": "nodemon src/server/index.js"
 },
 …
  ```
 
-We also changed the script name for starting the app.
-
  ## Start the server
 
  `npm run start:server`
 
- Now you should be able to access your React app and it will call the Express server and return a result.
+ We also changed the script name for starting the client.
+
+  ## Start the client
+
+ `npm run start:client`
+
+ Now you should be able to access your React app (client) and it will call the Express server and return a result.
 
 ## License
 

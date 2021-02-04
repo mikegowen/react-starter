@@ -392,6 +392,10 @@ Choose: "Yes"
 
 Modify this configuration to suit your own tastes.
 
+## Install the VSCode ESLint extension
+
+(https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)[ESLint]
+
 # Adding an Express server
 
 ## Install Express

@@ -283,6 +283,115 @@ git push -u origin master
 
 Start developing!
 
+# Adding linting
+
+## Install ESLint
+
+`npm install eslint --save-dev`
+
+## Initialize ESLint
+
+`npx eslint --init`
+
+You will be asked a series of questions that will setup your initial configuration.
+
+> How would you like to use ESLint?
+
+Choose: "To check syntax, find problems, and enforce code style"
+
+> What type of modules does your project use?
+
+Choose: "JavaScript modules (import/export)"
+
+We will add "CommonJS (require/exports)" once we’re done here.
+
+> Which framework does your project use?
+
+Choose: "React"
+
+> Does your project use TypeScript?
+
+Choose: "No"
+
+> Where does your code run?
+
+Use the space bar to select both "Browser" and "Node"
+
+> How would you like to define a style for your project?
+
+Choose: "Use a popular style guide"
+
+> Which style guide do you want to follow?
+
+Choose: "Airbnb: https://github.com/airbnb/javascript"
+
+> What format do you want your config file to be in?
+
+Choose: "JSON"
+
+> Would you like to install them now with npm?
+
+Choose: "Yes"
+
+## Edit the .eslintrc.json file that was created
+
+### .eslint.json
+```
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "no-console": "off",
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": ["_id"]
+      }
+    ],
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/prop-types": [0]
+  }
+}
+```
+
+Modify this configuration to suit your own tastes.
+
 # Adding an Express server
 
 ## Install Express
@@ -375,6 +484,19 @@ export default App
 },
 …
 ```
+
+## Update ESLint configuration
+
+### .eslintrc.json
+```
+"env": {
+  ...
+  "node": true,
+  "commonjs": true
+},
+```
+
+This tells ESLint that you want to also lint Node and CommonJS code.
 
 ## Start the server
 

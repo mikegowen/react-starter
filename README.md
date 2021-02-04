@@ -1,11 +1,11 @@
-# React Starter
+# Starter Project (React + Express + ESLint)
 
-This is a bare bones React starter app, with optional Express server, that can be used to bootstrap new React projects. The exact steps used to create this project can be found below. I would recommend going through the steps instead of cloning this repo if only for learning purposes. These steps were compiled after reading countless tutorials on creating a React app from scratch and choosing the set of features, configuration, and conventions that work well for *my* projects. Your mileage may vary.
+This is a bare bones starter app, with a React front-end, and Express back-end, and linting, that can be used to bootstrap new projects. The exact steps used to create this project can be found below. I would recommend going through the steps instead of cloning this repo if only for learning purposes. These steps were compiled after reading countless tutorials on creating an app from scratch and choosing the set of features, configuration, and conventions that work well for *my* projects. Your mileage may vary.
 
 ## Create your project directory structure
 
-`mkdir react-starter`<br />
-`cd react-starter`<br />
+`mkdir starter-project`<br />
+`cd starter-project`<br />
 `mkdir src`<br />
 `mkdir src/client`<br />
 `mkdir src/client/components`<br />
@@ -43,7 +43,7 @@ The key part of this markup is `id="root"`. In `index.js` we will tell React to 
 ```
 import React from "react"
 import ReactDOM from "react-dom"
-import App from "./components/App.jsx"
+import App from "./components/App"
 
 ReactDOM.render(<App />, document.querySelector("#root"))
 ```
@@ -138,40 +138,40 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader"
-          }
-        ]
+            loader: "html-loader",
+          },
+        ],
       },
       {
         test: /\.css$/,
         use: [
           "style-loader",
-          "css-loader"
-        ]
-      }
-    ]
+          "css-loader",
+        ],
+      },
+    ],
   },
   plugins: [
     new HtmlWebPackPlugin({
       template: "./src/client/index.html",
-      filename: "./index.html"
-    })
+      filename: "./index.html",
+    }),
   ],
   devServer: {
-    publicPath: "/"
+    publicPath: "/",
   },
   entry: "./src/client/index.js",
   output: {
     path: path.resolve(__dirname, "public"),
-    filename: "[name].[fullhash].js"
-  }
+    filename: "[name].[fullhash].js",
+  },
 }
 ```
 The `resolve` section allows you to leave off the listed extensions when importing.
@@ -250,38 +250,6 @@ We’ll install these are regular dependencies.
 ## Create your README
 
 `touch README.md`
-
-## Create .gitignore
-
-`touch .gitignore`
-
-## Add your exclusions
-
-### .gitignore
-
-```
-node_modules/
-public/
-```
-
-We don’t want to check in the various packages we install in `/node_modules`, they have their own GitHub respositories :) We also don’t need to check in our final bundled files in `/public` as they will be generated in production.
-
-## Setup Git/Github in your project
-
-```
-git init
-git add .
-git commit -m 'First!'
-git branch -M main
-git remote add origin git@github.com:mikegowen/react-starter.git
-git push -u origin master
-```
-
-## Start
-
-`npm start`
-
-Start developing!
 
 # Adding linting
 
@@ -434,6 +402,7 @@ This is the file that will contain your Express server and routes.
 ```
 const express = require("express")
 const cors = require("cors")
+
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -501,6 +470,34 @@ export default App
 ```
 
 This tells ESLint that you want to also lint Node and CommonJS code.
+
+# Setup Git/Github in your project
+
+## Create .gitignore
+
+`touch .gitignore`
+
+## Add your exclusions
+
+### .gitignore
+
+```
+node_modules/
+public/
+```
+
+We don’t want to check in the various packages we install in `/node_modules`, they have their own GitHub respositories :) We also don’t need to check in our final bundled files in `/public` as they will be generated in production.
+
+```
+git init
+git add .
+git commit -m 'First!'
+git branch -M main
+git remote add origin git@github.com:mikegowen/starter-project.git
+git push -u origin master
+```
+
+# Running the project
 
 ## Start the server
 

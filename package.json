@@ -1,7 +1,7 @@
 {
-  "name": "react-starter",
+  "name": "starter-project",
   "version": "1.0.0",
-  "description": "A barebones React starter app with optional Express server.",
+  "description": "A bare bones starter app, with a React front-end, and Express backend, and linting",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --hot --mode development",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mikegowen/react-starter.git"
+    "url": "git+https://github.com/mikegowen/starter-project.git"
   },
   "author": "Mike Gowen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mikegowen/react-starter/issues"
+    "url": "https://github.com/mikegowen/starter-project/issues"
   },
-  "homepage": "https://github.com/mikegowen/react-starter#readme",
+  "homepage": "https://github.com/mikegowen/starter-project#readme",
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",

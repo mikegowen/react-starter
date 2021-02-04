@@ -1,17 +1,83 @@
 # Starter Project (React + Express + ESLint)
 
-This is a bare bones starter app, with a React front-end, and Express back-end, and linting, that can be used to bootstrap new projects. The exact steps used to create this project can be found below. I would recommend going through the steps instead of cloning this repo if only for learning purposes. These steps were compiled after reading countless tutorials on creating an app from scratch and choosing the set of features, configuration, and conventions that work well for *my* projects. Your mileage may vary.
+This is a bare bones starter project, with a React front-end, Express back-end, and linting, that can be used to bootstrap new projects. The exact steps used to create this project can be found below. I would recommend going through the steps instead of cloning this repo if only for learning purposes. These steps were compiled after reading countless tutorials on creating an app from scratch and choosing the set of features, configuration, and conventions that work well for *my* projects. Your mileage may vary.
 
 ## Create your project directory structure
 
 `mkdir starter-project`<br />
 `cd starter-project`<br />
 `mkdir src`<br />
+
+The `/src` directory is where all of our source code will live. We’ll eventually add two folders under that called `/client` and `/server`. The final bundled code will be outputted to `/public`, but that folder is created automatically when we build our app so we won’t create it here.
+
+## Initialize npm
+
+`npm init`
+
+This will create your `package.json`. You will be presented with a few questions to help you fill it out. Leave `entry point` and `scripts` as their default values.
+
+# Adding an Express back-end
+
+We’ll start by adding our back-end Express server.
+
+## Install Express
+
+`npm install express`
+
+## Install Nodemon
+
+`npm install -g nodemon`
+
+Nodemon monitors your server files and automatically restart it when changes are made. It’s best to install this globally since you can use it for all of your Node apps.
+
+## Install CORS
+
+`npm install cors`
+
+This permits your client to talk to your server even though they are not on the same domain.
+
+## Install Axios
+
+`npm install axios`
+
+This replaces `fetch` for communicating with our Express server.
+
+## Create a server folder
+
+`mkdir src/server`
+
+## Create a server file
+
+`touch src/server/index.js`
+
+This is the file that will contain your Express server and routes.
+
+### index.js
+```
+const express = require("express")
+const cors = require("cors")
+
+const app = express()
+const port = process.env.PORT || 3000
+
+app.use(cors())
+
+app.listen(port, () => console.log(`Listening on port ${port}`))
+
+app.get("/", (req, res) => {
+  res.json({ message: "Hello world!" })
+})
+```
+
+This tells Express to listen for requests on port 3000, and sets up a single GET route at `/`.
+
+# Adding a React front-end
+
+## Create your directory structure
+
 `mkdir src/client`<br />
 `mkdir src/client/components`<br />
 `mkdir src/client/styles`
-
-The `/src` directory is where all of our source code will live. We’ll add an additional folder under that called `/client` in case we want to add a `/server` folder alongside it later. Final bundled code will be outputted to `/public` but that folder is created automatically when we build our app so we won’t create it here.
 
 ## Create your main files
 
@@ -27,7 +93,7 @@ The `/src` directory is where all of our source code will live. We’ll add an a
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>React Starter</title>
+  <title>Starter Project</title>
 </head>
 
 <body>
@@ -57,20 +123,28 @@ The last line simply says to take the `App` component and render it within the t
 
 ### App.jsx
 ```
-import React from "react"
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 import "../styles/App.css"
 
 function App() {
+  const [message, setMessage] = useState([])
+
+  useEffect(async () => {
+    const response = await axios.get("http://localhost:3000/")
+    setMessage(response.data.message)
+  }, [])
+
   return (
     <div className="App">
-      Hello world!
+      {message}
     </div>
   )
 }
 
 export default App
 ```
-This is a very simple React component. We first need to import the React library. Then we import the CSS file we just created to accompany this component. Classes are passed to components using the `className` property. Finally, we create and export our component which consists of a simple function that returns JSX. JSX essentially allows us to write something similar to HTML directly in JavaScript instead of manually creating elements.
+This is a very simple React component. We first need to import the React library. Then we’ll import Axios for calling our back-end. Finally, we’ll import the CSS file we just created to accompany this component. Classes are passed to components using the `className` property. Lastly, we create and export our component which consists of a simple function that returns JSX. JSX essentially allows us to write something similar to HTML directly in JavaScript instead of manually creating elements.
 
 ### App.css
 ```
@@ -84,12 +158,6 @@ This is a very simple CSS file to accompany `App.jsx`.
 ## Create GitHub repository
 
 You’ll want your GitHub repo URL handy when you initialize npm in the next section, or you can always add it later.
-
-## Initialize npm
-
-`npm init`
-
-This will create your `package.json`. You will be presented with a few questions to help you fill it out. Leave `entry point` and `scripts` as their default values.
 
 ## Install webpack
 
@@ -194,13 +262,13 @@ The `output` section tell webpack where to output our bundled files and to name 
 ```
 …
 "scripts": {
-  "start": "webpack serve --hot --mode development",
-  "build": "webpack --mode production"
-},
+  "start:client": "webpack serve --hot --mode development",
+  "build": "webpack --mode production",
+  "start:server": "nodemon src/server/index.js"
 …
  ```
 
- These are the command line scripts we can run to develop and build our app. We can run them by typing `npm start` and `npm run build` respectively. The `start` script tells `webpack` that we’re going to be developing and to watch for changes. The `build` script outputs our final bundled files to `/public`.
+ These are the command line scripts we use to run our client and server. The `start` scripts tell `webpack` that we’re going to be developing, and to watch for changes. The `build` script outputs our final bundled files to `/public`. To run this app locally we need to start our server and our client using `npm run start:server` and `npm run start:client` respectively.
 
 **--hot** – Reload the browser automatically whenever a change is made to our app.<br />
 **--mode** – Development or production.
@@ -308,7 +376,9 @@ Choose: "Yes"
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "node": true,
+    "commonjs": true
   },
   "extends": [
     "plugin:react/recommended",
@@ -364,113 +434,6 @@ Modify this configuration to suit your own tastes.
 
 [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-# Adding an Express server
-
-## Install Express
-
-`npm install express`
-
-## Install Nodemon
-
-`npm install -g nodemon`
-
-Nodemon monitors your server files and automatically restart it when changes are made. It’s best to install this globally since you can use it for all of your Node apps.
-
-## Install CORS
-
-`npm install cors`
-
-This permits your client to talk to your server even though they are not on the same domain.
-
-## Install Axios
-
-`npm install axios`
-
-This replaces `fetch` for communicating with our Express server.
-
-## Create a server folder
-
-`mkdir src/server`
-
-## Create a server file
-
-`touch src/server/index.js`
-
-This is the file that will contain your Express server and routes.
-
-### index.js
-```
-const express = require("express")
-const cors = require("cors")
-
-const app = express()
-const port = process.env.PORT || 3000
-
-app.use(cors())
-
-app.listen(port, () => console.log(`Listening on port ${port}`))
-
-app.get("/", (req, res) => {
-  res.json({ message: "Hello world!" })
-})
-```
-
-This tells Express to listen for requests on port 3000, and sets up a single GET route at `/`.
-
-## Call the Express server from React
-
-Update your `App.jsx` to call the Express server when a button is clicked.
-
-### App.jsx
-```
-import React, { useEffect, useState } from "react"
-import axios from "axios"
-import "../styles/App.css"
-
-function App() {
-  const [message, setMessage] = useState([])
-
-  useEffect(async () => {
-    const response = await axios.get("http://localhost:3000/")
-    setMessage(response.data.message)
-  }, [])
-
-  return (
-    <div className="App">
-      {message}
-    </div>
-  )
-}
-
-export default App
-```
-
-## Update scripts in package.json to add server
-
-### package.json
-```
-…
-"scripts": {
-  "start:client": "webpack serve --hot --mode development",
-  "build": "webpack --mode production",
-  "start:server": "nodemon src/server/index.js"
-},
-…
-```
-
-## Update ESLint configuration
-
-### .eslintrc.json
-```
-"env": {
-  ...
-  "node": true,
-  "commonjs": true
-},
-```
-
-This tells ESLint that you want to also lint Node and CommonJS code.
-
 # Setup Git/Github in your project
 
 ## Create .gitignore
@@ -503,13 +466,11 @@ git push -u origin master
 
 `npm run start:server`
 
-We also changed the script name for starting the client.
-
 ## Start the client
 
 `npm run start:client`
 
-Now you should be able to access your React app (client) and it will call the Express server and return a result.
+Now you should be able to access your React app (client) at `https://localhost:8080/`. It will call the Express back-end and return a message to your front-end.
 
 ## License
 

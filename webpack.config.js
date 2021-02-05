@@ -16,38 +16,38 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader"
-          }
-        ]
+            loader: "html-loader",
+          },
+        ],
       },
       {
         test: /\.css$/,
         use: [
           "style-loader",
-          "css-loader"
-        ]
-      }
-    ]
+          "css-loader",
+        ],
+      },
+    ],
   },
   plugins: [
     new HtmlWebPackPlugin({
       template: "./src/client/index.html",
-      filename: "./index.html"
-    })
+      filename: "./index.html",
+    }),
   ],
   devServer: {
-    publicPath: "/"
+    publicPath: "/",
   },
-  entry: "src/client/index.js",
+  entry: "./src/client/index.js",
   output: {
     path: path.resolve(__dirname, "public"),
-    filename: "[name].[fullhash].js"
-  }
+    filename: "[name].[fullhash].js",
+  },
 }

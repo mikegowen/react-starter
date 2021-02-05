@@ -1,6 +1,6 @@
 # Starter Project (React + Express + ESLint)
 
-This is a bare bones starter project, with a React front-end, Express back-end, and linting, that can be used to bootstrap new projects. The exact steps used to create this project can be found below. I would recommend going through the steps instead of cloning this repo if only for learning purposes. These steps were compiled after reading countless tutorials on creating an app from scratch and choosing the set of features, configuration, and conventions that work well for *my* projects. Your mileage may vary.
+This is a bare bones starter project with a React front-end, Express back-end, and linting, that can be used to bootstrap new projects. The exact steps used to create this project can be found below. I would recommend going through the steps instead of cloning this repo if only for learning purposes. These steps were compiled after reading countless tutorials on creating an app from scratch and choosing the set of features, configuration, and conventions that work well for *my* projects. Your mileage may vary.
 
 ## Create your project directory structure
 
@@ -18,7 +18,7 @@ This will create your `package.json`. You will be presented with a few questions
 
 # Adding an Express back-end
 
-We’ll start by adding our back-end Express server.
+We’ll start by adding our Express back-end server.
 
 ## Install Express
 
@@ -28,7 +28,7 @@ We’ll start by adding our back-end Express server.
 
 `npm install -g nodemon`
 
-Nodemon monitors your server files and automatically restart it when changes are made. It’s best to install this globally since you can use it for all of your Node apps.
+Nodemon monitors your server files and automatically restarts it when changes are made. It’s best to install this globally since you’ll likely use it for all of your Node apps.
 
 ## Install CORS
 
@@ -42,11 +42,11 @@ This permits your client to talk to your server even though they are not on the 
 
 This replaces `fetch` for communicating with our Express server.
 
-## Create a server folder
+## Create your server folder
 
 `mkdir src/server`
 
-## Create a server file
+## Create your server file
 
 `touch src/server/index.js`
 
@@ -144,7 +144,7 @@ function App() {
 
 export default App
 ```
-This is a very simple React component. We first need to import the React library. Then we’ll import Axios for calling our back-end. Finally, we’ll import the CSS file we just created to accompany this component. Classes are passed to components using the `className` property. Lastly, we create and export our component which consists of a simple function that returns JSX. JSX essentially allows us to write something similar to HTML directly in JavaScript instead of manually creating elements.
+This is a very simple React component. We first need to import the React library. Then we’ll import Axios for calling our Express back-end. Finally, we’ll import the CSS file we just created to accompany this component. Classes are passed to components using the `className` property. Our component which consists of a simple function that returns JSX. JSX essentially allows us to write something similar to HTML directly in JavaScript instead of manually creating elements.
 
 ### App.css
 ```
@@ -155,15 +155,11 @@ This is a very simple React component. We first need to import the React library
 
 This is a very simple CSS file to accompany `App.jsx`.
 
-## Create GitHub repository
-
-You’ll want your GitHub repo URL handy when you initialize npm in the next section, or you can always add it later.
-
 ## Install webpack
 
 `npm install webpack webpack-cli webpack-dev-server babel-loader html-loader html-webpack-plugin css-loader style-loader --save-dev`
 
-Webpack crawls your code recursively through `require` and `import` statements and builds a dependency graph. It then usues that graph to build a single JavaScript file with all of the modules in the correct order. Webpack starts at the entry point defined in `package.json`, (`index.js` by default).
+Webpack crawls your code recursively through `require` and `import` statements and builds a dependency graph. It then uses that graph to build a single JavaScript file with all of the modules in the correct order. Webpack starts at the entry point defined in `package.json`, (`index.js` by default).
 
 Webpack only works with JavaScript, so if you want Webpack to read other file types, you need to use "loaders". Loaders convert non-JavaScript files into JavaScript modules that Webpack can work with.
 
@@ -265,17 +261,17 @@ The `output` section tell webpack where to output our bundled files and to name 
   "start:client": "webpack serve --hot --mode development",
   "build": "webpack --mode production",
   "start:server": "nodemon src/server/index.js"
+}
 …
  ```
-
- These are the command line scripts we use to run our client and server. The `start` scripts tell `webpack` that we’re going to be developing, and to watch for changes. The `build` script outputs our final bundled files to `/public`. To run this app locally we need to start our server and our client using `npm run start:server` and `npm run start:client` respectively.
+ These are the command line scripts we use to run our client and server. The `start` scripts spin up our local servers and tell `webpack` to automatically restart the servers and refresh the browser when we make changes. The `build` script outputs our final bundled files to `/public`. To run this app locally use `npm run start:server` and `npm run start:client`.
 
 **--hot** – Reload the browser automatically whenever a change is made to our app.<br />
 **--mode** – Development or production.
 
 ## Install Babel
 
-`npm install @babel/core @babel/preset-env @babel/preset-react @babel/plugin-transform-runtime --save-dev`
+`npm install @babel/core @babel/preset-env @babel/preset-react @babel/plugin-transform-runtime @babel/runtime --save-dev`
 
 Babel is used to transpile modern JavaScript into JavaScript that is supported by older browsers. This allows us to use the newest JavaScript features (some of which React requires) without worrying about whether a our target browsers support them.
 
@@ -283,9 +279,6 @@ Babel is used to transpile modern JavaScript into JavaScript that is supported b
 **@babel/preset-env** This the main transpiler for converting modern JavaScript into older browser compatible JavaScript.<br />
 **@babel/preset-react** – This preset allows us to convert JSX (used by React) into regular JavaScript.<br />
 **@babel/plugin-transform-runtime** – This allows you to use async/await in React, among other things.<br />
-
-`npm install @babel/runtime`
-
 **@babel/runtime** – This allows you to use async/await in React, among other things.<br />
 
 ## Create your Babel configuration file
@@ -313,7 +306,7 @@ Babel is used to transpile modern JavaScript into JavaScript that is supported b
 **react** – This is the core React package.<br />
 **react-dom** – This package lets React connect to the DOM.
 
-We’ll install these are regular dependencies.
+We’ll install these as regular dependencies.
 
 ## Create your README
 
@@ -368,6 +361,8 @@ Choose: "JSON"
 > Would you like to install them now with npm?
 
 Choose: "Yes"
+
+ESLint will then prompt you to install the required dependedncies to support the choces you’ve made. Choose "Yes".
 
 ## Edit the .eslintrc.json file that was created
 
@@ -428,7 +423,7 @@ Choose: "Yes"
 }
 ```
 
-Modify this configuration to suit your own tastes.
+Modify this configuration to suit your own tastes. The above configuration is what I typically use. It’s best to start with the default configuration and add rules as you see fit.
 
 ## Install the VSCode ESLint extension
 
@@ -456,7 +451,7 @@ git init
 git add .
 git commit -m 'First!'
 git branch -M main
-git remote add origin git@github.com:mikegowen/starter-project.git
+git remote add origin git@github.com:<username>/<repository>.git
 git push -u origin master
 ```
 
@@ -470,7 +465,7 @@ git push -u origin master
 
 `npm run start:client`
 
-Now you should be able to access your React app (client) at `https://localhost:8080/`. It will call the Express back-end and return a message to your front-end.
+Now you should be able to access your new app at `https://localhost:8080/`. It will call the Express back-end and return a message to your front-end.
 
 ## License
 
